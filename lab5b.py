@@ -6,17 +6,25 @@ def read_file_string(file_name):
     # Takes file_name as string for a file name, returns its entire contents as a string
     file_open = open(str(file_name), 'r')
     read_data = file_open.read()
+    file_open.close()
     return read_data
 def read_file_list(file_name):
     # Takes a file_name as string for a file name, 
     # return its entire contents as a list of lines without new-line characters
-    with open(file_name, 'r') as f:
-        return [line.strip() for line in f]
+    f = open(file_name, 'r')
+    contents = ''
+    line = f.readline()
+    while line:
+        contents += line
+        line = f.readline()
+    f.close()
+    return contents
 
 def append_file_string(file_name, string_of_lines):
     # Takes two strings, appends the string to the end of the file
     file_append = open(str(file_name), 'a')
     append_str = file_append.write(string_of_lines)
+    file_append.close()
     return append_str
     
 
@@ -32,11 +40,16 @@ def write_file_list(file_name, list_of_lines):
 
 def copy_file_add_line_numbers(file_name_read, file_name_write):
      # Takes two strings, reads data from first file, writes data to new file, adds line number to new file
-    read_file = open(file_name_read), 'r'
-    #read_file.read(file_name_read)
-    append_data = open(str(file_name_write), 'a')
-    append_data.write(file_name_write)
+    f_read = open(file_name_read, 'r')
+    lines = f_read.readlines()
+    f_read.close()
 
+    f_write = open(file_name_write, 'w')
+    i = 0
+    while i < len(lines):
+        f_write.write(str(i + 1) + ':' + lines[i])
+        i += 1
+    f_write.close()
 
 
 
