@@ -12,13 +12,13 @@ def read_file_list(file_name):
     # Takes a file_name as string for a file name, 
     # return its entire contents as a list of lines without new-line characters
     f = open(file_name, 'r')
-    contents = ''
+    lines = []
     line = f.readline()
     while line:
-        contents += line
+        lines.append(line.rstrip('\n'))  # removes newline
         line = f.readline()
     f.close()
-    return contents
+    return lines
 
 def append_file_string(file_name, string_of_lines):
     # Takes two strings, appends the string to the end of the file
@@ -50,10 +50,6 @@ def copy_file_add_line_numbers(file_name_read, file_name_write):
         f_write.write(str(i + 1) + ':' + lines[i])
         i += 1
     f_write.close()
-
-
-
-
 
 
 
